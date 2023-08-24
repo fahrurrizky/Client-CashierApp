@@ -20,7 +20,7 @@ const Profile = ({onCreatedSuccess}) => {
           Authorization: `Bearer ${token}`
         }
       };
-      const response = await axios.get('http://localhost:8000/auth/cashier/profile', config);
+      const response = await axios.get('https://server-cashierapp-production.up.railway.app/auth/cashier/profile', config);
       setCashiers(response.data);
       console.log(response.data);
       onCreatedSuccess()
@@ -48,7 +48,7 @@ const Profile = ({onCreatedSuccess}) => {
         }
       };
 
-      await axios.post('http://localhost:8000/profile/picture', formData, config);
+      await axios.post('https://server-cashierapp-production.up.railway.app/profile/picture', formData, config);
       toast({
         title: 'Success',
         description: 'Cashier fetched successfully.',
@@ -86,7 +86,7 @@ const Profile = ({onCreatedSuccess}) => {
                   size="2xl"
                   pos="absolute"
                   rounded="lg"
-                  src={`http://localhost:8000/api/${cashiers.imgProfile}`}
+                  src={`https://server-cashierapp-production.up.railway.app/api/${cashiers.imgProfile}`}
                   top="-3.8rem"
                   boxShadow="lg"
                 />
@@ -102,7 +102,7 @@ const Profile = ({onCreatedSuccess}) => {
                     showBorder={true}
                     borderColor="green.400"
                     name="avatar"
-                    src={`http://localhost:8000/api/${cashiers.imgProfile}`}
+                    src={`https://server-cashierapp-production.up.railway.app/api/${cashiers.imgProfile}`}
                     d={{ base: 'block', sm: 'none' }}
                   />
                   <Text fontWeight="bold" fontSize="lg" fontFamily="cursive">

@@ -42,7 +42,7 @@ const Category = ({price, setPrice, handleSortPrice, category, handleFilterCateg
   const fetchCategories = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8000/product/categories"
+        "https://server-cashierapp-production.up.railway.app/product/categories"
       );
       setCategories(response.data.result);
     } catch (error) {
@@ -67,7 +67,7 @@ const Category = ({price, setPrice, handleSortPrice, category, handleFilterCateg
 
     try {
       const response = await axios.get(
-        "http://localhost:8000/transaction/list",
+        "https://server-cashierapp-production.up.railway.app/transaction/list",
         config
       );
       setCartItems(response.data.cartItems);
@@ -87,7 +87,7 @@ const Category = ({price, setPrice, handleSortPrice, category, handleFilterCateg
 
     try {
       await axios.post(
-        "http://localhost:8000/transaction/make",
+        "https://server-cashierapp-production.up.railway.app/transaction/make",
         {},
         {
           headers: {

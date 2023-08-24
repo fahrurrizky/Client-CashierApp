@@ -41,7 +41,7 @@ export default function Product() {
 
   const fetchProduct = async () => {
     try {
-      let apiUrl = `http://localhost:8000/product/all?page=${currentPage}`;
+      let apiUrl = `https://server-cashierapp-production.up.railway.app/product/all?page=${currentPage}`;
   
       if (searchQuery) {
         apiUrl += `&name=${searchQuery}`;
@@ -88,7 +88,7 @@ export default function Product() {
 
     try {
       const response = await axios.post(
-        "http://localhost:8000/transaction/start",
+        "https://server-cashierapp-production.up.railway.app/transaction/start",
         {
           productId: productId,
           quantity: quantities[index], // Use the quantity for the specific product
@@ -184,7 +184,7 @@ const handleMouseLeave = (index) => {
                 pos: "absolute",
                 top: 2,
                 left: 0,
-                backgroundImage: `http://localhost:8000/${obj.productImg}`,
+                backgroundImage: `https://server-cashierapp-production.up.railway.app/${obj.productImg}`,
                 filter: "blur(10px)",
                 zIndex: -1,
               }}
@@ -199,7 +199,7 @@ const handleMouseLeave = (index) => {
                 height={130}
                 width={190}
                 objectFit="contain"
-                src={`http://localhost:8000/${obj.productImg}`}
+                src={`https://server-cashierapp-production.up.railway.app/${obj.productImg}`}
                 alt="#"
                 onMouseEnter={() => handleHover(index)} // Pass the index to handleHover
                 onMouseLeave={() => handleMouseLeave(index)} // Pass the index to handleMouseLeave

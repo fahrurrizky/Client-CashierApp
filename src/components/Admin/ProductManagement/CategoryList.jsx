@@ -21,7 +21,7 @@ const CategoryList = ({price, setPrice, handleSortPrice, category, handleFilterC
 const [categories, setCategories] = useState([]);
   const fetchCategory = async () => {
     try {
-      const {data} = await axios.get(`http://localhost:8000/product/categories`);
+      const {data} = await axios.get(`https://server-cashierapp-production.up.railway.app/product/categories`);
       console.log("dafas", data);
       setCategories(data.result);
     } catch (error) {

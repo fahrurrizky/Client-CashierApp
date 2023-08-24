@@ -33,7 +33,7 @@ const EditProduct = ({ isOpen, onClose, selectedProduct, onProductUpdated, onEdi
 
   const fetchCategory = async () => {
     try {
-      const {data} = await axios.get(`http://localhost:8000/product/categories`);
+      const {data} = await axios.get(`https://server-cashierapp-production.up.railway.app/product/categories`);
       console.log("dafas", data);
       setCategories(data.result);
     } catch (error) {
@@ -80,7 +80,7 @@ const EditProduct = ({ isOpen, onClose, selectedProduct, onProductUpdated, onEdi
       console.log("Updating product with ID:", selectedProduct.id);
 
       const updatedProduct = await axios.patch(
-        `http://localhost:8000/product/carti/${selectedProduct.id}`,
+        `https://server-cashierapp-production.up.railway.app/product/carti/${selectedProduct.id}`,
         formDataObj,
         {
           headers: {

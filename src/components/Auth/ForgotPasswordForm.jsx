@@ -34,7 +34,7 @@ const ForgotPassword = () => {
 
   const handleSubmit = (values) => {
     axios
-      .put("http://localhost:8000/auth/password", {
+      .put("https://server-cashierapp-production.up.railway.app/auth/password", {
         email: values.email,
         FE_URL: "http://localhost:3000"
       })

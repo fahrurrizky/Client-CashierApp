@@ -87,7 +87,7 @@ const Login = () => {
             onSubmit={(values, { setSubmitting }) => { 
               axios
                 .post(
-                  "http://localhost:8000/auth/login",
+                  "https://server-cashierapp-production.up.railway.app/auth/login",
                   {
                     username: values.username,
                     password: values.password,

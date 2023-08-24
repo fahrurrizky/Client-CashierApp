@@ -20,7 +20,7 @@ const SalesChart = () => {
 
   const fetchDailySalesData = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/report/sales");
+      const response = await axios.get("https://server-cashierapp-production.up.railway.app/report/sales");
       setDailySalesData(response.data.data);
     } catch (error) {
       console.error(error);

@@ -31,7 +31,7 @@ const SalesReport = () => {
   const generateReport = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8000/report/daily?startDate=${startDate}&endDate=${endDate}`
+        `https://server-cashierapp-production.up.railway.app/report/daily?startDate=${startDate}&endDate=${endDate}`
       );
       const data = await response.json();
       setReportData(data.data);
@@ -50,7 +50,7 @@ const SalesReport = () => {
   const fetchProductsSold = async (transactionId) => {
     try {
       const response = await fetch(
-        `http://localhost:8000/report/sold?startDate=${startDate}&endDate=${endDate}`
+        `https://server-cashierapp-production.up.railway.app/report/sold?startDate=${startDate}&endDate=${endDate}`
       );
       const data = await response.json();
       if (data.productSold && data.productSold.length > 0) {

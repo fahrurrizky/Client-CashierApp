@@ -51,7 +51,7 @@ const Product = ({searchResult}) => {
 
   const fetchProduct = async () => {
     try {
-      let apiUrl = `http://localhost:8000/product/all?page=${currentPage}`;
+      let apiUrl = `https://server-cashierapp-production.up.railway.app/product/all?page=${currentPage}`;
   
       if (searchQuery) {
         apiUrl += `&name=${searchQuery}`;
@@ -107,7 +107,7 @@ const handlefilterCategory = (value) => {
   const deactiveProduct = async (id) => {
     try {
       const res = await axios.patch(
-        `http://localhost:8000/product/cart/deactivate?id=${id}`
+        `https://server-cashierapp-production.up.railway.app/product/cart/deactivate?id=${id}`
       );
       alert(res.data.message);
       fetchProduct();
@@ -119,7 +119,7 @@ const handlefilterCategory = (value) => {
   const activeProduct = async (id) => {
     try {
       const res = await axios.patch(
-        `http://localhost:8000/product/cart/activate?id=${id}`
+        `https://server-cashierapp-production.up.railway.app/product/cart/activate?id=${id}`
       );
       alert(res.data.message);
       fetchProduct();
@@ -202,7 +202,7 @@ const handlefilterCategory = (value) => {
                 pos: 'absolute',
                 top: 2,
                 left: 0,
-                backgroundImage: `url(http://localhost:8000/api/${obj.productImg})`,
+                backgroundImage: `url(https://server-cashierapp-production.up.railway.app/api/${obj.productImg})`,
                 filter: 'blur(10px)',
                 zIndex: -1,
               }}
@@ -217,7 +217,7 @@ const handlefilterCategory = (value) => {
                 height={130}
                 width={190}
                 objectFit="contain"
-                src={`http://localhost:8000/api/${obj.productImg}`}
+                src={`https://server-cashierapp-production.up.railway.app/api/${obj.productImg}`}
                 alt="#"
                 onMouseEnter={() => handleHover(index)} // Pass the index to handleHover
                 onMouseLeave={() => handleMouseLeave(index)} // Pass the index to handleMouseLeave

@@ -46,7 +46,7 @@ const CreateCashier = ({ isOpen, onClose, onCreateSuccess }) => {
       password,
     };
     try {
-      const response = axios.post('http://localhost:8000/auth/cashier', requestBody);
+      const response = axios.post('https://server-cashierapp-production.up.railway.app/auth/cashier', requestBody);
       console.log('Cashier created:', response.data);
 
       setUsername('');

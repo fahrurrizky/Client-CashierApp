@@ -31,7 +31,7 @@ export default function CreateProduct({ isOpen, onClose, onCreateSuccess }) {
 
   const fetchCategory = async () => {
     try {
-      const {data} = await axios.get(`http://localhost:8000/product/categories`);
+      const {data} = await axios.get(`https://server-cashierapp-production.up.railway.app/product/categories`);
       console.log("dafas", data);
       setCategories(data.result);
     } catch (error) {
@@ -63,7 +63,7 @@ export default function CreateProduct({ isOpen, onClose, onCreateSuccess }) {
       formDataObj.append('description', formData.description);
 
       const response = await axios.post(
-        'http://localhost:8000/product/cart',
+        'https://server-cashierapp-production.up.railway.app/product/cart',
         formDataObj,
         {
           headers: {

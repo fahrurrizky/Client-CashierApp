@@ -20,7 +20,7 @@ const CashierList = () => {
   const handleUpdateCashiers = async () => {
     try {
       // Make a PATCH request to update the selected cashier data
-      await axios.patch(`http://localhost:8000/auth/cashier/${selectedCashier.id}`, {
+      await axios.patch(`https://server-cashierapp-production.up.railway.app/auth/cashier/${selectedCashier.id}`, {
         currentUsername: selectedCashier.username,
         currentEmail: selectedCashier.email,
         newUsername: selectedCashier.newUsername,
@@ -31,7 +31,7 @@ const CashierList = () => {
       onEditCashierClose();
 
       // Fetch the updated list of cashiers from the server and update the state
-      const response = await axios.get('http://localhost:8000/auth/cashier');
+      const response = await axios.get('https://server-cashierapp-production.up.railway.app/auth/cashier');
       setCashiers(response.data);
     } catch (error) {
       console.log(error);
@@ -40,7 +40,7 @@ const CashierList = () => {
 
   const fetchCashiers = async () => {
     try {
-      const response = await axios.get('http://localhost:8000/auth/cashier');
+      const response = await axios.get('https://server-cashierapp-production.up.railway.app/auth/cashier');
       setCashiers(response.data);
       onCreateCashierClose()
       console.log(response.data);
@@ -52,7 +52,7 @@ const CashierList = () => {
   const deactiveCashier = async (id) => {
     try {
       const res = await axios.patch(
-        `http://localhost:8000/auth/cashier/deactivate?id=${id}`
+        `https://server-cashierapp-production.up.railway.app/auth/cashier/deactivate?id=${id}`
       );
       alert(res.data.message);
       fetchCashiers();
@@ -64,7 +64,7 @@ const CashierList = () => {
   const activeCashier = async (id) => {
     try {
       const res = await axios.patch(
-        `http://localhost:8000/auth/cashier/activate?id=${id}`
+        `https://server-cashierapp-production.up.railway.app/auth/cashier/activate?id=${id}`
       );
       alert(res.data.message);
       fetchCashiers();
@@ -101,7 +101,7 @@ const CashierList = () => {
               showBorder={true}
               borderColor="white.400"
               name="avatar"
-              src={`http://localhost:8000/api/${obj.imgProfile}`}
+              src={`https://server-cashierapp-production.up.railway.app/api/${obj.imgProfile}`}
               d={{ base: 'none', sm: 'block' }}
             />
             <Stack direction="column" spacing={4} textAlign="left" maxW="4xl">

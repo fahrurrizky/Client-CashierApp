@@ -23,7 +23,7 @@ const CreateCategory = ({ isOpen, onClose, onCreateSuccess }) => {
     try {
       const token = localStorage.getItem("token");
       await axios.post(
-        "http://localhost:8000/product/category",
+        "https://server-cashierapp-production.up.railway.app/product/category",
         {
           name: name,
         },

@@ -27,7 +27,7 @@ function EditCategory({ isOpen, onClose, onEditSuccess, onCreateSuccess }) {
     async function fetchCategories() {
       try {
         const response = await axios.get(
-          "http://localhost:8000/product/categories"
+          "https://server-cashierapp-production.up.railway.app/product/categories"
         );
         setCategories(response.data.result);
         setInputValues(
@@ -47,7 +47,7 @@ function EditCategory({ isOpen, onClose, onEditSuccess, onCreateSuccess }) {
   const handleEdit = async ({ id }) => {
     const newName = inputValues[id];
     try {
-      await axios.put(`http://localhost:8000/product/category/${id}`, {
+      await axios.put(`https://server-cashierapp-production.up.railway.app/product/category/${id}`, {
         name: newName,
       });
       toast({
@@ -73,7 +73,7 @@ function EditCategory({ isOpen, onClose, onEditSuccess, onCreateSuccess }) {
 
   const handleDeleteCategory = async ({ id }) => {
     try {
-      await axios.delete(`http://localhost:8000/product/category/${id}`);
+      await axios.delete(`https://server-cashierapp-production.up.railway.app/product/category/${id}`);
       const updatedCategories = categories.filter(
         (category) => category.id !== id
       );

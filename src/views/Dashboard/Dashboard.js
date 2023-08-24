@@ -77,7 +77,7 @@ export default function Dashboard() {
   const fetchSalesReportData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8000/report/sold?startDate=${startDate}&endDate=${endDate}`
+        `https://server-cashierapp-production.up.railway.app/report/sold?startDate=${startDate}&endDate=${endDate}`
       );
       const data = response.data.productSold;
       setSalesReportData(data);

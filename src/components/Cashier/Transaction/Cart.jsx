@@ -39,7 +39,7 @@ const Cart = () => {
 
     try {
       const response = await axios.get(
-        "http://localhost:8000/transaction/list",
+        "https://server-cashierapp-production.up.railway.app/transaction/list",
         config
       );
       setCartItems(response.data.cartItems);
@@ -52,7 +52,7 @@ const Cart = () => {
 
   const fetchProductNames = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/product/all");
+      const response = await axios.get("https://server-cashierapp-production.up.railway.app/product/all");
       const productNamesMap = {};
       response.data.productList.forEach((product) => {
         productNamesMap[product.id] = {
@@ -90,7 +90,7 @@ const Cart = () => {
 
     try {
       await axios.patch(
-        "http://localhost:8000/transaction/remove",
+        "https://server-cashierapp-production.up.railway.app/transaction/remove",
         {
           productId: productId,
           quantity: 0, // Change the quantity as needed
@@ -113,7 +113,7 @@ const Cart = () => {
             <Flex gap={"5"} mx={"3"}>
               <Box>
                 <Image
-                  src={`http://localhost:8000/${
+                  src={`https://server-cashierapp-production.up.railway.app/${
                     productNames[item.productId]?.image
                   }`}
                   objectFit="contain"

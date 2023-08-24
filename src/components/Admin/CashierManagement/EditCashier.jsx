@@ -32,7 +32,7 @@ const EditCashier = ({ isOpen, onClose, cashier, onUpdate, onEditSuccess }) => {
 
   const handleSave = async () => {
     try {
-      const response = await axios.patch(`http://localhost:8000/auth/cashier/${cashier.id}`, {
+      const response = await axios.patch(`https://server-cashierapp-production.up.railway.app/auth/cashier/${cashier.id}`, {
         currentUsername,
         currentEmail,
         newUsername,

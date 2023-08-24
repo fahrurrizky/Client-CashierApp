@@ -34,7 +34,7 @@ export default function Navbar() {
           Authorization: `Bearer ${token}`
         }
       };
-      const response = await axios.get('http://localhost:8000/auth/cashier/profile', config);
+      const response = await axios.get('https://server-cashierapp-production.up.railway.app/auth/cashier/profile', config);
       setCashiers(response.data);
       console.log(response.data);
     } catch (error) {
@@ -67,7 +67,7 @@ export default function Navbar() {
               >
                 <Avatar
                   size={"md"}
-                  src={`http://localhost:8000/api/${cashiers.imgProfile}`}
+                  src={`https://server-cashierapp-production.up.railway.app/api/${cashiers.imgProfile}`}
                 />
               </MenuButton>
               <Text fontSize={"sm"} ml={"3"}>

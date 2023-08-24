@@ -9,7 +9,7 @@ const SalesAggregatePage = () => {
     // Fetch data from the backend API
     const startDate = '2023-08-02';
     const endDate = '2023-08-06';
-    const apiUrl = `http://localhost:8000/report/sales?startDate=${startDate}&endDate=${endDate}`;
+    const apiUrl = `https://server-cashierapp-production.up.railway.app/report/sales?startDate=${startDate}&endDate=${endDate}`;
 
     fetch(apiUrl)
       .then(response => response.json())

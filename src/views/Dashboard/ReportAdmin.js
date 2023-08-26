@@ -86,7 +86,7 @@ const SalesReport = () => {
         <SalesChart />
       </Center>
       <Flex mt={'10'}>
-        <Box maxHeight={'500px'} overflowX={'scroll'}>
+        <Box maxHeight={'400px'} overflowX={'scroll'}>
           <VStack spacing="4">
             <Heading>Sales Report</Heading>
             <Input
@@ -105,10 +105,9 @@ const SalesReport = () => {
               value={endDate}
               onChange={(e) => setEndDate(e.target.value)}
             />
-            <Button variant={'outline'} textColor="white" w="100%" _hover={{bgColor:"white", color:"black"}} onClick={generateReport}>
+            <Button  isDisabled={startDate === "" || endDate === ""} variant={'outline'} textColor="white" w="100%" _hover={{bgColor:"white", color:"black"}} onClick={generateReport}>
               Generate Report
             </Button>
-
             <Table variant="simple" >
               <Thead>
                 <Tr bg={'white'}>
@@ -153,7 +152,7 @@ const SalesReport = () => {
             )}
           </VStack>
         </Box>
-        <Container maxW="lg" maxHeight={'350px'} overflowX={'scroll'}>
+        <Container maxW="lg" maxHeight={'400px'} overflowX={'scroll'} pt={'1'}>
 
           {selectedTransactionId !== null && (
             <ProductsSold

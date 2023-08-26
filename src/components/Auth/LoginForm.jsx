@@ -21,12 +21,16 @@ import {
   InputRightElement,
   Link as LinkChakra,
   AbsoluteCenter,
+  useToast,
+  Spinner,
 } from "@chakra-ui/react";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [islogin, setIslogin] = useState(false); // Add state for loading
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const toast = useToast();
   useEffect (() => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -38,6 +42,49 @@ const Login = () => {
     setShowPassword(!showPassword);
   };
 
+  const handleLogin = async (values, { setSubmitting }) => {
+    setIsLoggingIn(true); // Set loading state to true
+    try {
+      const response = await axios.post(
+        "https://server-cashierapp-production.up.railway.app/auth/login",
+        {
+          username: values.username,
+          password: values.password,
+        }
+      );
+
+      console.log(JSON.stringify(response.data));
+      dispatch(loginSuccess(response.data.token));
+
+      if (response.data.role === "Cashier") {
+        navigate("/dashboard-cashier");
+      } else if (response.data.role === "Admin") {
+        navigate("/dashboard-admin");
+      }
+
+      localStorage.setItem("token", response.data.token);
+
+      toast({
+        title: "Login Success",
+        status: "success",
+        duration: 2000,
+        isClosable: true,
+      });
+    } catch (error) {
+      console.log(error);
+
+      toast({
+        title: "Login Failed",
+        description: "Invalid username or password.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    } finally {
+      setIsLoggingIn(false); // Reset loading state
+      setSubmitting(false);
+    }
+  };
   return (
     <Box
       bgImage={
@@ -84,32 +131,9 @@ const Login = () => {
                 )
                 .required("Password is required"),
             })}
-            onSubmit={(values, { setSubmitting }) => { 
-              axios
-                .post(
-                  "https://server-cashierapp-production.up.railway.app/auth/login",
-                  {
-                    username: values.username,
-                    password: values.password,
-                  }
-                )
-                .then(function (response) {
-                  console.log(JSON.stringify(response.data));
-                  dispatch(loginSuccess(response.data.token))
-                  if(response.data.role === "Cashier"){
-                    navigate("/dashboard-cashier")
-                  }else if (response.data.role === "Admin") {
-                    navigate('/dashboard-admin')
-                  }
-                  setSubmitting(false);
-                  localStorage.setItem("token", response.data.token);
-                })
-                .catch(function (error) {
-                  console.log(error);
-                  setSubmitting(false);
-                });
-            }}
-          >
+            onSubmit={handleLogin}
+            >
+          {({ isSubmitting }) => (
             <Form>
               <FormControl id="email" mb={3}>
                 <FormLabel>Username</FormLabel>
@@ -156,10 +180,14 @@ const Login = () => {
                 mb={6}
                 width="full"
                 variant={"outline"}
+                isLoading={isLoggingIn}
+              loadingText="Logging in..."
+              spinner={<Spinner size="sm" />}
               >
                 Log in
               </Button>
             </Form>
+            )}
           </Formik>
           <Text>
             Forgot your password?{" "}

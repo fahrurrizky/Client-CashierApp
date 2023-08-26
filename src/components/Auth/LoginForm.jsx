@@ -26,7 +26,7 @@ import {
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false); 
+  const [isSubmitting, setIsSubmitting] = useState(false); // Add state for submission loading
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const toast = useToast();
@@ -88,43 +88,44 @@ const Login = () => {
                 .required("Password is required"),
             })}
             onSubmit={(values, { setSubmitting }) => { 
-              setIsSubmitting(true);
-              try {
-                const response = await axios.post(
+              setIsSubmitting(true); // Start loading
+              axios
+                .post(
                   "https://server-cashierapp-production.up.railway.app/auth/login",
                   {
                     username: values.username,
                     password: values.password,
                   }
-                );
-
-                dispatch(loginSuccess(response.data.token));
-
-                if (response.data.role === "Cashier") {
-                  navigate("/dashboard-cashier");
-                } else if (response.data.role === "Admin") {
-                  navigate("/dashboard-admin");
-                }
-
-                localStorage.setItem("token", response.data.token);
-
-                toast({
-                  title: "Login Success",
-                  status: "success",
-                  duration: 2000,
-                  isClosable: true,
+                )
+                .then(function (response) {
+                  console.log(JSON.stringify(response.data));
+                  dispatch(loginSuccess(response.data.token))
+                  if(response.data.role === "Cashier"){
+                    navigate("/dashboard-cashier")
+                  }else if (response.data.role === "Admin") {
+                    navigate('/dashboard-admin')
+                  }
+                  setSubmitting(false);
+                  localStorage.setItem("token", response.data.token);
+                  toast({
+                    title: "Login Success",
+                    status: "success",
+                    duration: 2000,
+                    isClosable: true,
+                  });
+                })
+                .catch(function (error) {
+                  toast({
+                    title: "Email and password not match",
+                    status: "error",
+                    duration: 3000,
+                    isClosable: true,
+                  });
+                })
+                .finally(() => {
+                  setIsSubmitting(false); // Stop loading
+                  setSubmitting(false);
                 });
-              } catch (error) {
-                toast({
-                  title: "Email and password not match",
-                  status: "error",
-                  duration: 3000,
-                  isClosable: true,
-                });
-              } finally {
-                setIsSubmitting(false);
-                setSubmitting(false);
-              }
             }}
           >
              {({ isSubmitting }) => (

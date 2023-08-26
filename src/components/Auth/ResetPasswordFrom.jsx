@@ -18,11 +18,13 @@ import {
   InputGroup,
   InputRightElement,
   Link as LinkChakra,
+  Spinner,
 } from "@chakra-ui/react";
 import axios from "axios";
 
 const ResetPasswordForm = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const url = window.location.href.split("/");
   const token = url[url.length - 1];
   const navigate = useNavigate();
@@ -33,6 +35,7 @@ const ResetPasswordForm = () => {
   };
 
   const handleSubmit = (values, { setSubmitting }) => {
+    setIsLoading(true);
     axios
       .patch(
         "https://server-cashierapp-production.up.railway.app/auth/password",
@@ -56,6 +59,7 @@ const ResetPasswordForm = () => {
           duration: 2000,
           isClosable: true,
         });
+        setIsLoading(false);
       })
       .catch(function (error) {
         console.log(error);
@@ -67,6 +71,7 @@ const ResetPasswordForm = () => {
           isClosable: true,
         });
         setSubmitting(false);
+        setIsLoading(false);
       });
   };
 
@@ -172,6 +177,9 @@ const ResetPasswordForm = () => {
                 mb={6}
                 width="full"
                 variant={"outline"}
+                isLoading={isLoading} 
+                loadingText="Sending..."
+                spinner={<Spinner color="white" />}
               >
                 Reset Password
               </Button>

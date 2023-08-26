@@ -12,6 +12,7 @@ import {
   Heading,
   Text,
   Link as LinkChakra,
+  Spinner,
 } from "@chakra-ui/react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -19,6 +20,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const ForgotPassword = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const toast = useToast();
   const navigate = useNavigate();
 
@@ -33,17 +35,18 @@ const ForgotPassword = () => {
   });
 
   const handleSubmit = (values) => {
+    setIsSubmitting(true); // Start loading
     axios
       .put("https://server-cashierapp-production.up.railway.app/auth/password", {
         email: values.email,
-        FE_URL: "http://localhost:3000"
+        FE_URL: "https://themajesticmixer.netlify.app"
       })
       .then(function (response) {
         navigate("/");
         toast({
           title: "Password reset password sent successfully",
           status: "success",
-          duration: 1000,
+          duration: 3000,
           isClosable: true,
         });
         console.log(response.data);
@@ -53,10 +56,13 @@ const ForgotPassword = () => {
           title: "Email not registered",
           description: error.response.data,
           status: "error",
-          duration: 4000,
+          duration: 3000,
           isClosable: true,
         });
         console.log(error);
+      })
+      .finally(() => {
+        setIsSubmitting(false); // Stop loading
       });
   };
 
@@ -124,6 +130,9 @@ const ForgotPassword = () => {
                 mb={6}
                 width="full"
                 variant={"outline"}
+                isLoading={isSubmitting} // Conditionally render the spinner
+                loadingText="Sending..."
+                spinner={<Spinner color="white" />}
               >
                 Send Verification Link
               </Button>

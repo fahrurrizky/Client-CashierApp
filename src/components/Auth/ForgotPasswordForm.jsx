@@ -40,7 +40,7 @@ const ForgotPassword = () => {
     axios
       .put("https://server-cashierapp-production.up.railway.app/auth/password", {
         email: values.email,
-        FE_URL: "https://themajesticmixer.netlify.app"
+        // FE_URL: "https://themajesticmixer.netlify.app"
       })
       .then(function (response) {
         navigate("/");
